@@ -2,13 +2,8 @@
     <head>
     </head>
     <body>
-        aaaa
-        <div id="layer" style="display:block;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;"></div>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script>
-            var element_layer = document.getElementById('layer');
-
-
             new daum.Postcode({
                 oncomplete: function(data) {
                     if(data.userSelectedType=="R"){
