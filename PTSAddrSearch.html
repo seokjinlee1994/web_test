@@ -3,19 +3,17 @@
 <!--         <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     </head>
     <body>
-        <center>
-            <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-            <script>
-                new daum.Postcode({
-                    oncomplete: function(data) {
-                        if(data.userSelectedType=="R"){
-                            window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
-                        } else {
-                            window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
-                        }
+        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script>
+            new daum.Postcode({
+                oncomplete: function(data) {
+                    if(data.userSelectedType=="R"){
+                        window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
+                    } else {
+                        window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
                     }
-                }).embed();
+                }
+            }).embed();
             </script>
-        </center>
     </body>
 </html>
