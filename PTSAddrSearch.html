@@ -2,11 +2,13 @@
     <head>
     </head>
     <body>
-        <?php
-            header("Content-Type: text/html; charset=UTF-8");
-        ?>
-        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        aaaa
+        <div id="layer" style="display:block;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;"></div>
+        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         <script>
+            var element_layer = document.getElementById('layer');
+
+
             new daum.Postcode({
                 oncomplete: function(data) {
                     if(data.userSelectedType=="R"){
@@ -14,7 +16,9 @@
                     } else {
                         window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
                     }
-                }
+                },
+                width : '100%',
+                height : '100%'
             }).embed();
         </script>
     </body>
