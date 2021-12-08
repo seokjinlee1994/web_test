@@ -1,9 +1,11 @@
 <html>
     <head>
-<!--         <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     </head>
     <body>
-        <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <?php
+            header("Content-Type: text/html; charset=UTF-8");
+        ?>
+        <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
         <script>
             new daum.Postcode({
                 oncomplete: function(data) {
@@ -13,7 +15,7 @@
                         window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
                     }
                 }
-            }).embed();
-            </script>
+            }).open();
+        </script>
     </body>
 </html>
