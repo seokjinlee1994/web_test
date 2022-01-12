@@ -46,6 +46,7 @@
             }).embed();
             
             function postMessageToiOS(postData) {
+                alert("주소 : " + postData.address + "<br>" + "우편번호 : " + postData.zonecode + "<br>" + "건물명 : " + postData.buildingName)
                 window.webkit.messageHandlers.PTSAddrSearch.postMessage(postData);
             }
         </script>
