@@ -1,7 +1,7 @@
 <html>
     <head>
     </head>
-    <body>
+    <body onload="execDaumPostcode()">
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script>
             var getParam = function(key){
@@ -15,40 +15,54 @@
                 });
                 return _parammap[key];
             };
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    if(getParam("os") == "aos") {
-                        alert("aaaa")
-                        if(data.userSelectedType=="R"){
-                            window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
-                        } else {
-                            window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
-                        }
-                    } else if (getParam("os") == "ios") {
-                        
-                        var address = ""
-                        if(data.userSelectedType=="R") {
-                            address = data.roadAddress;
-                        } else {
-                            address = data.jibunAddress;
-                        }
+            function execDaumPostcode() {
+                new daum.Postcode({
+                    oncomplete: function(data) {
+                        if(getParam("os") == "aos") {
+                            alert("aaaa")
+                            if(data.userSelectedType=="R"){
+                                window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
+                            } else {
+                                window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
+                            }
+                        } else if (getParam("os") == "ios") {
 
-                        var postData = {
-                            address : address,
-                            zoneCode : data.zonecode,
-                            buildingName : data.buildingName
-                        };
-                        
-                        window.postMessageToiOS(postData);
-                    }
-                }, 
-                width : '100%',
-                height : '100%'
-            }).embed();
+                            var address = ""
+                            if(data.userSelectedType=="R") {
+                                address = data.roadAddress;
+                            } else {
+                                address = data.jibunAddress;
+                            }
+
+                            var postData = {
+                                address : address,
+                                zoneCode : data.zonecode,
+                                buildingName : data.buildingName
+                            };
+
+                            window.postMessageToiOS(postData);
+                        }
+                    }, 
+                    width : '100%',
+                    height : '100%'
+                }).embed();
+                if (getParam("os") == "ios") {
+                    initLayerPosition();
+                }
+            }
             
             function postMessageToiOS(postData) {
 //                 alert("주소 : " + postData.address + "<br>" + "우편번호 : " + postData.zoneCode + "<br>" + "건물명 : " + postData.buildingName)
                 window.webkit.messageHandlers.PTSAddrSearch.postMessage(postData);
+            }
+            
+            function initLayerPosition(){
+                var width = (window.innerWidth || document.documentElement.clientWidth);
+                var height = (window.innerHeight || document.documentElement.clientHeight);
+                element_layer.style.width = width + 'px';
+                element_layer.style.height = height + 'px';
+                element_layer.style.left = (((window.innerWidth || document.documentElement.clientWidth) - width)/2) + 'px';
+                element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2) + 'px';
             }
         </script>
     </body>
