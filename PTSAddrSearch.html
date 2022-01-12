@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
     </head>
     <body onload="execDaumPostcode()">
         <div id = "layer" style = "display:block; position:absolute; overflow:hidden; z-index:1; -webkit-overflow-scrolling:touch; ">
@@ -24,7 +25,7 @@
                 new daum.Postcode({
                     oncomplete: function(data) {
                         if(getParam("os") == "aos") {
-//                             alert("aaaa")
+                            alert("aaaa")
                             if(data.userSelectedType=="R"){
                                 window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
                             } else {
