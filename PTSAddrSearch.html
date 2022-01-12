@@ -6,15 +6,29 @@
         <script>
             new daum.Postcode({
                 oncomplete: function(data) {
+                    var address = "";
                     if(data.userSelectedType=="R"){
                         window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
+                        address = data.roadAddress;
                     } else {
                         window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
+                        address = data.jibunAddress;
                     }
+                    
+                    var postData = {
+                        address : address,
+                        zoneCode : data.zoneCode,
+                        buildingName : data.buildingName
+                    };
+                    window.postMessageToiOS(postData);
                 },
                 width : '100%',
                 height : '100%'
             }).embed();
+            
+            function postMessageToiOS(postData) {
+                window.webkit.messageHandlers.callbackHandler.postMessage(postData);
+            }
         </script>
     </body>
 </html>
