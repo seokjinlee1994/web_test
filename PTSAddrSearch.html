@@ -18,6 +18,7 @@
             new daum.Postcode({
                 oncomplete: function(data) {
                     if(getParam("os") == "aos") {
+                        alert("aaaa")
                         if(data.userSelectedType=="R"){
                             window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
                         } else {
@@ -27,17 +28,17 @@
                         
                         var address = ""
                         if(data.userSelectedType=="R") {
-                            address = data.roadAddress
+                            address = data.roadAddress;
                         } else {
-                            address = data.jibunAddress
+                            address = data.jibunAddress;
                         }
                         var postData = {
                             address : address,
-                            zoneCode : data.zoneCode,
+                            zoneCode : data.zonecode,
                             buildingName : data.buildingName
-                        }
+                        };
                         
-                        window.postMessageToiOS(postData)
+                        window.postMessageToiOS(postData);
                     }
                 }, 
                 width : '100%',
