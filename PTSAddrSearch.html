@@ -18,7 +18,6 @@
             new daum.Postcode({
                 oncomplete: function(data) {
                     if(getParam("os") == "aos") {
-                        alert("OS : " + getParam("os"));
                         if(data.userSelectedType=="R"){
                             window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
                         } else {
@@ -46,7 +45,6 @@
             }).embed();
             
             function postMessageToiOS(postData) {
-                alert("Address : " + postData.address);
                 window.webkit.messageHandlers.PTSAddrSearch.postMessage(postData);
             }
         </script>
