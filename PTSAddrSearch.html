@@ -17,24 +17,16 @@
             };
             new daum.Postcode({
                 oncomplete: function(data) {
-                    
-                    alert("OS : " + getParam("os"));
-                    
-                    var address = "";
-                    if(data.userSelectedType=="R"){
-                        window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
-                        address = data.roadAddress;
+                    if(getParam("os") == "aos") {
+                        alert("OS : " + getParam("os"));
+                        if(data.userSelectedType=="R"){
+                            window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
+                        } else {
+                            window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
+                        }
                     } else {
-                        window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
-                        address = data.jibunAddress;
+                        alert("OS : " + getParam("os"));
                     }
-                    
-                    var postData = {
-                        address : address,
-                        zoneCode : data.zoneCode,
-                        buildingName : data.buildingName
-                    };
-                    window.postMessageToiOS(postData);
                 }, 
                 width : '100%',
                 height : '100%'
