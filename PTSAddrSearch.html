@@ -6,6 +6,12 @@
         <script>
             new daum.Postcode({
                 oncomplete: function(data) {
+                    
+                    var urlParams = window.location.search;
+                    var os = urlParams.get('os');
+                    
+                    document.write(os + 'aaaaa<br>')
+                    
                     var address = "";
                     if(data.userSelectedType=="R"){
                         window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
