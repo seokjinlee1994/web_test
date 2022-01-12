@@ -35,7 +35,9 @@
                         buildingName : data.buildingName
                     };
                     window.postMessageToiOS(postData);
-                }
+                }, 
+                width : '100%',
+                height : '100%'
             }).embed();
             
             function postMessageToiOS(postData) {
