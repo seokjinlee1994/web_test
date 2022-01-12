@@ -39,21 +39,18 @@
                     new daum.Postcode({
                     oncomplete: function(data) {
 
-                            var address = ""
-                            if(data.userSelectedType=="R") {
-                                address = data.roadAddress;
-                            } else {
-                                address = data.jibunAddress;
-                            }
-
-                            var postData = {
-                                address : address,
-                                zoneCode : data.zonecode,
-                                buildingName : data.buildingName
-                            };
-
-                            window.postMessageToiOS(postData);
+                        var address = ""
+                        if(data.userSelectedType=="R") {
+                            address = data.roadAddress;
+                        } else {
+                            address = data.jibunAddress;
                         }
+                        var postData = {
+                            address : address,
+                            zoneCode : data.zonecode,
+                            buildingName : data.buildingName
+                        };
+                        window.postMessageToiOS(postData);
                     }, 
                     width : '100%',
                     height : '100%'
