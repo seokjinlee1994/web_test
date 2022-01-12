@@ -5,42 +5,38 @@
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script>
             var getParam = function(key){
-        var _parammap = {};
-        document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
-            function decode(s) {
-                return decodeURIComponent(s.split("+").join(" "));
-            }
+                var _parammap = {};
+                document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+                    function decode(s) {
+                        return decodeURIComponent(s.split("+").join(" "));
+                    }
  
-            _parammap[decode(arguments[1])] = decode(arguments[2]);
-        });
- 
-        return _parammap[key];
-    };
- 
- 
-    alert("OS : " + getParam("os"));
-//             new daum.Postcode({
-//                 oncomplete: function(data) {
+                    _parammap[decode(arguments[1])] = decode(arguments[2]);
+                });
+                return _parammap[key];
+            };
+            new daum.Postcode({
+                oncomplete: function(data) {
                     
+                    alert("OS : " + getParam("os"));
                     
+                    var address = "";
+                    if(data.userSelectedType=="R"){
+                        window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
+                        address = data.roadAddress;
+                    } else {
+                        window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
+                        address = data.jibunAddress;
+                    }
                     
-//                     var address = "";
-//                     if(data.userSelectedType=="R"){
-//                         window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
-//                         address = data.roadAddress;
-//                     } else {
-//                         window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
-//                         address = data.jibunAddress;
-//                     }
-                    
-//                     var postData = {
-//                         address : address,
-//                         zoneCode : data.zoneCode,
-//                         buildingName : data.buildingName
-//                     };
-//                     window.postMessageToiOS(postData);
-//                 }
-//             }).embed();
+                    var postData = {
+                        address : address,
+                        zoneCode : data.zoneCode,
+                        buildingName : data.buildingName
+                    };
+                    window.postMessageToiOS(postData);
+                }
+            }).embed();
             
             function postMessageToiOS(postData) {
                 window.webkit.messageHandlers.callbackHandler.postMessage(postData);
