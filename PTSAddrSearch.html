@@ -4,31 +4,32 @@
     <body>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script>
-            new daum.Postcode({
-                oncomplete: function(data) {
-                    
-                    var urlParams = window.location.search;
+            var urlParams = window.location.search;
                     var os = urlParams.get('os');
                     
                     document.write(os + 'aaaaa<br>')
+//             new daum.Postcode({
+//                 oncomplete: function(data) {
                     
-                    var address = "";
-                    if(data.userSelectedType=="R"){
-                        window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
-                        address = data.roadAddress;
-                    } else {
-                        window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
-                        address = data.jibunAddress;
-                    }
                     
-                    var postData = {
-                        address : address,
-                        zoneCode : data.zoneCode,
-                        buildingName : data.buildingName
-                    };
-                    window.postMessageToiOS(postData);
-                }
-            }).embed();
+                    
+//                     var address = "";
+//                     if(data.userSelectedType=="R"){
+//                         window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
+//                         address = data.roadAddress;
+//                     } else {
+//                         window.PTSAddrSearch.setAddress(data.zonecode, data.jibunAddress, data.buildingName);
+//                         address = data.jibunAddress;
+//                     }
+                    
+//                     var postData = {
+//                         address : address,
+//                         zoneCode : data.zoneCode,
+//                         buildingName : data.buildingName
+//                     };
+//                     window.postMessageToiOS(postData);
+//                 }
+//             }).embed();
             
             function postMessageToiOS(postData) {
                 window.webkit.messageHandlers.callbackHandler.postMessage(postData);
