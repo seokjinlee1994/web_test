@@ -24,7 +24,7 @@
                 new daum.Postcode({
                     oncomplete: function(data) {
                         if(getParam("os") == "aos") {
-                            alert("aaaa")
+//                             alert("aaaa")
                             if(data.userSelectedType=="R"){
                                 window.PTSAddrSearch.setAddress(data.zonecode, data.roadAddress, data.buildingName);
                             } else {
@@ -54,7 +54,7 @@
                 if (getParam("os") == "ios") {
                     element_layer.style.display = 'bolck';
                     initLayerPosition();
-                    alert("initLayerPosition()");
+//                     alert("initLayerPosition()");
                 }
             }
             
