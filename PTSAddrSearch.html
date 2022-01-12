@@ -4,10 +4,21 @@
     <body>
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <script>
-            var urlParams = window.location.search;
-                    var os = urlParams.get('os');
-                    
-                    document.write(os + 'aaaaa<br>')
+            var getParam = function(key){
+        var _parammap = {};
+        document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
+            function decode(s) {
+                return decodeURIComponent(s.split("+").join(" "));
+            }
+ 
+            _parammap[decode(arguments[1])] = decode(arguments[2]);
+        });
+ 
+        return _parammap[key];
+    };
+ 
+ 
+    alert("test1 : " + getParam("test1"));
 //             new daum.Postcode({
 //                 oncomplete: function(data) {
                     
